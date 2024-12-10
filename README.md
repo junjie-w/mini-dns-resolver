@@ -78,13 +78,10 @@ cd mini-dns-resolver/examples
 
 # Try different examples
 npm install
-npm run lookup:lib  # Library usage example
-npm run lookup:cli  # CLI-style usage
+npm run lookup:lib                          # Library usage example
+npm run lookup:cli google.com               # CLI usage with single domain
+npm run lookup:cli google.com github.com    # CLI usage with multiple domains
 ```
-
-- Library usage shows all features (single lookup, bulk lookup, filtering records)
-- CLI-style usage accepts domain names as arguments for interactive testing
-
 
 ## License
 
