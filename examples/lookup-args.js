@@ -1,11 +1,11 @@
-import { DNSResolver } from "mini-dns-resolver";
+import { DNSResolver } from "@junjie-wu/mini-dns-resolver";
 
-async function lookupCli(domains) {
+async function lookupArgs(domains) {
   const resolver = new DNSResolver();
 
   if (domains.length === 0) {
-    console.log("Usage: npm run start <domain1> [domain2 ...]");
-    console.log("Example: npm run start google.com github.com");
+    console.log("Usage: npm run lookup:args <domain1> [domain2 ...]");
+    console.log("Example: npm run lookup:args google.com github.com");
     return;
   }
 
@@ -24,4 +24,4 @@ async function lookupCli(domains) {
   }
 }
 
-lookupCli(process.argv.slice(2));
+lookupArgs(process.argv.slice(2));

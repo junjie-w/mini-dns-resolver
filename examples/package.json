@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "lookup:lib": "node lookup-lib.js",
-    "lookup:cli": "node lookup-cli.js"
+    "lookup:args": "node lookup-args.js"
   },
   "dependencies": {
-    "mini-dns-resolver": "file:../"
+    "@junjie-wu/mini-dns-resolver": "file:../"
   }
 }
