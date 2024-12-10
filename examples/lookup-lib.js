@@ -1,4 +1,4 @@
-import { DNSResolver } from "mini-dns-resolver";
+import { DNSResolver } from "@junjie-wu/mini-dns-resolver";
 
 async function lookupLib() {
   const resolver = new DNSResolver();
