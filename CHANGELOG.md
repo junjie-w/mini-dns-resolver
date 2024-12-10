@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/junjie-w/mini-dns-resolver/compare/v1.0.0...v1.0.1) (2024-12-10)
+
+
+### Bug Fixes
+
+* update examples and docs ([251477b](https://github.com/junjie-w/mini-dns-resolver/commit/251477b45005c45dc1347ad90c192331473904f6))
+
 # 1.0.0 (2024-12-10)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@junjie-wu/mini-dns-resolver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple DNS resolver package for Node.js with TypeScript support. Provides both single and bulk domain lookups.",
   "author": "Junjie Wu",
   "license": "MIT",
