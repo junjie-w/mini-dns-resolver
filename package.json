@@ -1,13 +1,27 @@
 {
-  "name": "mini-dns-resolver",
+  "name": "@junjie-wu/mini-dns-resolver",
   "version": "1.0.0",
-  "description": "A simple DNS resolver for Node.js",
+  "description": "A simple DNS resolver package for Node.js with TypeScript support. Provides both single and bulk domain lookups.",
+  "author": "Junjie Wu",
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junjie-w/mini-dns-resolver.git"
+  },
+  "homepage": "https://github.com/junjie-w/mini-dns-resolver#readme",
+  "bugs": {
+    "url": "https://github.com/junjie-w/mini-dns-resolver/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -22,8 +36,6 @@
     "resolver",
     "lookup"
   ],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",

@@ -1,6 +1,6 @@
-# mini-dns-resolver Examples
+# Mini DNS Resolver Examples
 
-Examples of using [mini-dns-resolver](https://github.com/junjie-w/mini-dns-resolver/) package:
+Examples of using [mini-dns-resolver](https://www.npmjs.com/package/@junjie-wu/mini-dns-resolver/) package.
 
 ## Library Usage
 

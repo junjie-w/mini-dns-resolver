@@ -1,6 +1,6 @@
-# mini-dns-resolver
+# Mini DNS Resolver
 
-A simple DNS resolver package for Node.js with TypeScript support. Provides both single and bulk domain lookups. Available as npm package.
+A simple DNS resolver package for Node.js with TypeScript support. Provides both single and bulk domain lookups. Available as [NPM package](https://www.npmjs.com/package/@junjie-wu/mini-dns-resolver).
 
 ## Installation
 
