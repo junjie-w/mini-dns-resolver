@@ -5,13 +5,13 @@ A simple DNS resolver package for Node.js with TypeScript support. Provides both
 ## Installation
 
 ```bash
-npm install mini-dns-resolver
+npm install @junjie-wu/mini-dns-resolver
 ```
 
 ## Usage
 
 ```typescript
-import { DNSResolver } from 'mini-dns-resolver';
+import { DNSResolver } from '@junjie-wu/mini-dns-resolver';
 
 // Create resolver instance
 const resolver = new DNSResolver();
@@ -78,9 +78,9 @@ cd mini-dns-resolver/examples
 
 # Try different examples
 npm install
-npm run lookup:lib                          # Library usage example
-npm run lookup:cli google.com               # CLI usage with single domain
-npm run lookup:cli google.com github.com    # CLI usage with multiple domains
+npm run lookup:lib                           # Library usage example
+npm run lookup:args google.com               # Argument-based lookup with single domain
+npm run lookup:args google.com github.com    # Argument-based lookup with multiple domains
 ```
 
 ## License
