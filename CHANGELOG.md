@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/junjie-w/mini-dns-resolver/compare/v1.0.1...v1.1.0) (2024-12-12)
+
+
+### Features
+
+* add in-memory cache for dns lookups ([c80db66](https://github.com/junjie-w/mini-dns-resolver/commit/c80db66f772143916f6e51df663723cd1d2925d2))
+
 ## [1.0.1](https://github.com/junjie-w/mini-dns-resolver/compare/v1.0.0...v1.0.1) (2024-12-10)
 
 
