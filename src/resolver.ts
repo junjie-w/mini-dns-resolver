@@ -1,8 +1,11 @@
 import dns from 'dns';
 import { promisify } from 'util';
-import { DNSRecord, DNSLookupResult } from './types.js';
+import { DNSRecord, DNSLookupResult, CacheEntry } from './types.js';
 
 export class DNSResolver {
+  private cache: Map<string, CacheEntry> = new Map();
+  private readonly cacheTimeout: number;
+
   private resolve4 = promisify(dns.resolve4);
   private resolve6 = promisify(dns.resolve6);
   private resolveMx = promisify(dns.resolveMx);
@@ -10,7 +13,35 @@ export class DNSResolver {
   private resolveNs = promisify(dns.resolveNs);
   private resolveCname = promisify(dns.resolveCname);
 
+  constructor({ cacheTimeout = 300000 } = {}) {
+    this.cacheTimeout = cacheTimeout;
+  }
+
+  private getCachedResult(domain: string): DNSLookupResult | null {
+    const cached = this.cache.get(domain);
+    if (cached && cached.expires > new Date()) {
+      return cached.result;
+    }
+    this.cache.delete(domain);
+    return null;
+  }
+
+  private setCacheResult(domain: string, result: DNSLookupResult): void {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + this.cacheTimeout);
+    this.cache.set(domain, { result, expires });
+  }
+
   async lookup(domain: string): Promise<DNSLookupResult> {
+    const cached = this.getCachedResult(domain);
+    if (cached) {
+      return {
+        ...cached,
+        timestamp: new Date(),
+        fromCache: true
+      };
+    }
+
     const startTime = Date.now();
     const records: DNSRecord[] = [];
 
@@ -40,12 +71,16 @@ export class DNSResolver {
         throw new Error(`No DNS records found for ${domain}`);
       }
 
-      return {
+      const result = {
         domain,
         records,
         timestamp: new Date(),
-        responseTime: Date.now() - startTime
+        responseTime: Date.now() - startTime,
+        fromCache: false
       };
+
+      this.setCacheResult(domain, result);
+      return result;
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Failed to resolve ${domain}: ${error.message}`);
@@ -60,5 +95,9 @@ export class DNSResolver {
       .filter((result): result is PromiseFulfilledResult<DNSLookupResult> => 
         result.status === 'fulfilled')
       .map(result => result.value);
+  }
+
+  clearCache(): void {
+    this.cache.clear();
   }
 }

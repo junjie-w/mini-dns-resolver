@@ -7,6 +7,6 @@
     "lookup:args": "node lookup-args.js"
   },
   "dependencies": {
-    "@junjie-wu/mini-dns-resolver": "file:../"
+    "mini-dns-resolver": "file:../"
   }
 }

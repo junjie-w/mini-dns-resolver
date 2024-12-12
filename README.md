@@ -1,20 +1,20 @@
 # Mini DNS Resolver
 
-A simple DNS resolver package for Node.js with TypeScript support. Provides both single and bulk domain lookups. Available as [NPM package](https://www.npmjs.com/package/@junjie-wu/mini-dns-resolver).
+A simple DNS resolver package for Node.js with TypeScript support. Provides both single and bulk domain lookups. Available as [NPM package](https://www.npmjs.com/package/mini-dns-resolver).
 
 ## Installation
 
 ```bash
-npm install @junjie-wu/mini-dns-resolver
+npm install mini-dns-resolver
 ```
 
 ## Usage
 
 ```typescript
-import { DNSResolver } from '@junjie-wu/mini-dns-resolver';
+import { DNSResolver } from 'mini-dns-resolver';
 
-// Create resolver instance
-const resolver = new DNSResolver();
+// Create resolver instance with optional cache timeout (default: 5 minutes)
+const resolver = new DNSResolver({ cacheTimeout: 60000 });
 
 // Single domain lookup
 try {
@@ -40,7 +40,7 @@ const mxRecords = result.records.filter(record => record.type === 'MX');
 ## API
 
 ### `lookup(domain: string): Promise<DNSLookupResult>`
-Resolves all DNS records for a single domain. Throws an error if no records are found or if resolution fails.
+Resolves all DNS records for a single domain. Uses cache if available. Throws an error if no records are found or if resolution fails.
 
 ### `lookupAll(domains: string[]): Promise<DNSLookupResult[]>`
 Resolves DNS records for multiple domains. Returns results only for successful lookups, silently skipping failed ones.
@@ -58,15 +58,9 @@ interface DNSLookupResult {
   records: DNSRecord[];
   timestamp: Date;
   responseTime: number;
+  fromCache: boolean;
 }
 ```
-
-## Error Handling
-
-The package throws errors in these cases:
-- No DNS records found for domain
-- DNS resolution failures
-- Network issues
 
 ## Examples
 
@@ -78,10 +72,17 @@ cd mini-dns-resolver/examples
 
 # Try different examples
 npm install
-npm run lookup:lib                           # Library usage example
-npm run lookup:args google.com               # Argument-based lookup with single domain
-npm run lookup:args google.com github.com    # Argument-based lookup with multiple domains
+npm run lookup:lib                           # Library usage with caching example
+npm run lookup:args google.com               # Command line lookup with single domain
+npm run lookup:args google.com github.com    # Command line lookup with multiple domains
 ```
+
+## Error Handling
+
+The package throws errors in these cases:
+- No DNS records found for domain
+- DNS resolution failures
+- Network issues
 
 ## License
 

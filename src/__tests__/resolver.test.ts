@@ -14,6 +14,35 @@ describe('DNSResolver', () => {
       expect(result.records).toBeInstanceOf(Array);
       expect(result.timestamp).toBeInstanceOf(Date);
       expect(typeof result.responseTime).toBe('number');
+      expect(result.fromCache).toBe(false);
+    });
+
+    it('should use cache for repeated lookups', async () => {
+      const result1 = await resolver.lookup('google.com');
+      expect(result1.fromCache).toBe(false);
+
+      const result2 = await resolver.lookup('google.com');
+      expect(result2.fromCache).toBe(true);
+    });
+
+    it('should clear cache when requested', async () => {
+      await resolver.lookup('google.com');
+
+      resolver.clearCache();
+
+      const result = await resolver.lookup('google.com');
+      expect(result.fromCache).toBe(false);
+    });
+
+    it('should respect cache timeout', async () => {
+      const shortCacheResolver = new DNSResolver({ cacheTimeout: 1 }); 
+
+      await shortCacheResolver.lookup('google.com');
+
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      const result = await shortCacheResolver.lookup('google.com');
+      expect(result.fromCache).toBe(false);
     });
 
     it('should fail with invalid domain', async () => {
@@ -35,6 +64,15 @@ describe('DNSResolver', () => {
       });
     });
     
+    it('should use cache in bulk lookups', async () => {
+      await resolver.lookupAll(['google.com', 'github.com']);
+
+      const results = await resolver.lookupAll(['google.com', 'github.com']);
+      results.forEach(result => {
+        expect(result.fromCache).toBe(true);
+      });
+    });
+
     it('should handle mix of valid and invalid domains', async () => {
       const domains = ['google.com', 'invalid-domain-123.xyz'];
       const results = await resolver.lookupAll(domains);
