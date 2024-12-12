@@ -8,4 +8,10 @@ export interface DNSLookupResult {
   records: DNSRecord[];
   timestamp: Date;
   responseTime: number;
+  fromCache: boolean;
+}
+
+export interface CacheEntry {
+  result: DNSLookupResult;
+  expires: Date;
 }

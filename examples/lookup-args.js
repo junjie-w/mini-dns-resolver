@@ -1,7 +1,7 @@
-import { DNSResolver } from "@junjie-wu/mini-dns-resolver";
+import { DNSResolver } from "mini-dns-resolver";
 
 async function lookupArgs(domains) {
-  const resolver = new DNSResolver();
+  const resolver = new DNSResolver({ cacheTimeout: 60000 });
 
   if (domains.length === 0) {
     console.log("Usage: npm run lookup:args <domain1> [domain2 ...]");

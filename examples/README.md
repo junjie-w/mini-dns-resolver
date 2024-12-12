@@ -1,11 +1,11 @@
 # Mini DNS Resolver Examples
 
-Examples of using [mini-dns-resolver](https://www.npmjs.com/package/@junjie-wu/mini-dns-resolver/) package.
+Examples of using [mini-dns-resolver](https://www.npmjs.com/package/mini-dns-resolver) package.
 
 ## Library Usage
 
-Example of using the package as a library, including:
-- Single domain lookup
+Demonstrates using the package as a library, including:
+- Single domain lookup with caching
 - Multiple domains lookup
 - Filtering specific record types
 
@@ -13,9 +13,9 @@ Example of using the package as a library, including:
 npm run lookup:lib
 ```
 
-## Argument-based Usage
+## Command Line Usage
 
-Example that accepts domain names as arguments:
+Accepts domain names as arguments:
 
 ```bash
 # Single domain lookup
@@ -38,7 +38,8 @@ Single domain lookup:
     // ...
   ],
   "timestamp": "2024-12-10T12:34:56.789Z",
-  "responseTime": 123
+  "responseTime": 123,
+  "fromCache": false
 }
 ```
 
@@ -48,3 +49,4 @@ Single domain lookup:
 - `records`: Array of DNS records found
 - `timestamp`: When the lookup was performed
 - `responseTime`: Time taken in milliseconds
+- `fromCache`: Whether the lookup was from cache
