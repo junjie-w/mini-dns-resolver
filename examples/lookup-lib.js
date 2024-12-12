@@ -1,12 +1,16 @@
-import { DNSResolver } from "@junjie-wu/mini-dns-resolver";
+import { DNSResolver } from "mini-dns-resolver";
 
 async function lookupLib() {
-  const resolver = new DNSResolver();
+  const resolver = new DNSResolver({ cacheTimeout: 60000 });
 
   try {
     const result = await resolver.lookup("google.com");
     console.log("Single domain lookup result:");
     console.log(JSON.stringify(result, null, 2));
+
+    console.log("\nSingle domain lookup result from cache:");
+    const resultFromCache = await resolver.lookup("google.com");
+    console.log(JSON.stringify(resultFromCache, null, 2));
   } catch (error) {
     console.error("Single lookup failed:", error);
   }
